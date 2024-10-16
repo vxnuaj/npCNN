@@ -77,4 +77,6 @@ While learning about the convolution operations, besides the ones that were impl
 
 Feel free to check it out at [`misc`](misc)!
 
+Also wrote a lil guide to understanding backpropagation through convolutions, check it out under [`backpropCNN.md`](backpropCNN.md)
+
 </div>

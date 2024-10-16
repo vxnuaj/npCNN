@@ -64,11 +64,11 @@ where
 - $∂\text{act-func}(Z^{l})$ is the derivative of the activation w.r.t to $Z^l$, $\frac{∂A}{∂Z^l}$
 
 
-Ultimately, we have $∂Z^l$, the gradients w.r.t to the output weighted sum of the $l$th convolutional layer.
+Ultimately, we have $∂Z^l$, the gradients w.r.t to the output weighted sum of the $lth$ convolutional layer.
 
 Once we have $∂Z^l$, we can compute $∂W^l$.
 
-To get $∂W^l$, given $∂Z^l$, the kernel $\mathcal{K}^l$, and the input to the current layer, $A^{l-1}$, we essentially slide the kernel $\mathcal{K}^l$ over $A^{l-1}$ to extract a patch of $A^{l-1}$, at position $i, j$ ( denoted as $A_{patch}^{l-1}$ ), as is done in the a convolution. But rather than computing a weighted sum, we simply element wise multiply with the $ith$ element in $∂Z^l$ at each $i$ location to get a portion of our gradient at each $i$th step, call it $\mathcal{O}_i$
+To get $∂W^l$, given $∂Z^l$, the kernel $\mathcal{K}^l$, and the input to the current layer, $A^{l-1}$, we essentially slide the kernel $\mathcal{K}^l$ over $A^{l-1}$ to extract a patch of $A^{l-1}$, at position $i, j$ ( denoted as $A_{patch}^{l-1}$ ), as is done in the a convolution. But rather than computing a weighted sum, we simply element wise multiply with the $ith$ element in $∂Z^l$ at each $i$ location to get a portion of our gradient at each $ith$ step, call it $\mathcal{O}_i$
 
 Once we have every possible $\mathcal{O}_i$, we element wise sum all $\mathcal{O}_i$, to get our gradient for $\mathcal{K}^l$, as $∂W^l$.
 
@@ -91,7 +91,7 @@ Ultimately, we can express this as:
 
 ```
 
-where $i$ denotes the row position and $j$ denotes the column position of the current $n$th patch.
+where $i$ denotes the row position and $j$ denotes the column position of the current $nth$ patch.
 
 We can also compute $∂B^l$ from $∂Z^l$ as:
 
@@ -183,9 +183,9 @@ Now to propagate the gradient, $∂Z^l$, back to a prior layer, say a convolutio
 
 Though fortunately, this is simpler than max-unpooling, as we don't have to store the indices of the max-pooled values with respect to the original input in the cache.
 
-Instead, given the kernel for the average-pooling layer, $\mathcal{K}^l$, and the gradients, $∂Z^l$, we can instead create an empty mask of same dimensions as $Z^{l-1}$ (just as was done in $\partial$ through max-pooling), let's call it $∂Z_{mask}^{l-1}$. We can slide $\mathcal{K}^l$ over $∂Z_{mask}^{l-1}$, and for each $r$ region in the mask, $∂Z_{mask_{r}}^{l-1}$, we extract the $r$th value in $∂Z^l$ at position $i, j$, and evenly spread it out over the region.
+Instead, given the kernel for the average-pooling layer, $\mathcal{K}^l$, and the gradients, $∂Z^l$, we can instead create an empty mask of same dimensions as $Z^{l-1}$ (just as was done in $\partial$ through max-pooling), let's call it $∂Z_{mask}^{l-1}$. We can slide $\mathcal{K}^l$ over $∂Z_{mask}^{l-1}$, and for each $r$ region in the mask, $∂Z_{mask_{r}}^{l-1}$, we extract the $rth$ value in $∂Z^l$ at position $i, j$, and evenly spread it out over the region.
 
-If the $∂Z_{mask_{r}}^{l-1}$ was dimensions $2 \times 2$, or size $4$, and the $r$th value in $∂Z^l$ was $8$, we'd divide $8$ by $4$, yielding $2$, and insert the $2$ into all $4$ slots of the current region.
+If the $∂Z_{mask_{r}}^{l-1}$ was dimensions $2 \times 2$, or size $4$, and the $rth$ value in $∂Z^l$ was $8$, we'd divide $8$ by $4$, yielding $2$, and insert the $2$ into all $4$ slots of the current region.
 
 If our stride is less than the a given dimension of the kernel, (whether it be height or width), at some point, we will a have overlapping regions to insert values of $∂Z^l$. Then the case becomes that for the overlapping portions, we add the newly dispersed gradients, $(\frac{∂Z^l}{r_{size}})^r$, to the previously dispersed gradients at the previous $r$, $(\frac{∂Z^l}{∂r_{size}})^{r-1}$.
 

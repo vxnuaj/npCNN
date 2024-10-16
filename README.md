@@ -25,6 +25,8 @@ It struggled to run any variation of MNIST (Fashion MNIST, K-MNIST, etc), even o
 
 You can train the model as follows, feel free to tweak as you need. For more details on how to generate the dataset, check out the full script in [`train.py`](train.py) or [`generate.py`](generate.py)
 
+</div >
+
 ```
 # hyperparams
 seed = 1
@@ -67,8 +69,12 @@ nn.test(
 )
 ```
 
+<div align = 'center'>
+
 ### MISC
 
 While learning about the convolution operations, besides the ones that were implemented for the model itself, I wrote a couple of `.ipynb` files, which include some (unorganized) implementations for multiple ops, such as the convolution itself, max-pooling, mean-pooling, etc.
 
 Feel free to check it out at [`misc`](misc)!
+
+</div>

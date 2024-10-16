@@ -1,4 +1,3 @@
-
 ### Backprop for CNNs
 
 > [Resource](https://people.tamu.edu/~sji/classes/bp.pdf)
@@ -181,17 +180,17 @@ Now to propagate the gradient, $∂Z^l$, back to a prior layer, say a convolutio
 
 Though fortunately, this is simpler than max-unpooling, as we don't have to store the indices of the max-pooled values with respect to the original input in the cache.
 
-Instead, given the kernel for the average-pooling layer, $\mathcal{K}^l$, and the gradients, $∂Z^l$, we can instead create an empty mask of same dimensions as $Z^{l-1}$ (just as was done in $\partial$ through max-pooling), let's call it $∂Z^{l-1}_{mask}$. We can slide $\mathcal{K}^l$ over $∂Z^{l-1}_{mask}$, and for each $r$ region in the mask, $∂Z^{l-1}_{mask_{r}}$, we extract the $r$th value in $∂Z^l$ at position $i, j$, and evenly spread it out over the region.
+Instead, given the kernel for the average-pooling layer, $\mathcal{K}^l$, and the gradients, $∂Z^l$, we can instead create an empty mask of same dimensions as $Z^{l-1}$ (just as was done in $\partial$ through max-pooling), let's call it $∂Z_{mask}^{l-1}$. We can slide $\mathcal{K}^l$ over $∂Z_{mask}^{l-1}$, and for each $r$ region in the mask, $∂Z_{mask_{r}}^{l-1}$, we extract the $r$th value in $∂Z^l$ at position $i, j$, and evenly spread it out over the region.
 
-If the $∂Z^{l-1}_{mask_r}$ was dimensions $2 \times 2$, or size $4$, and the $r$th value in $∂Z^l$ was $8$, we'd divide $8$ by $4$, yielding $2$, and insert the $2$ into all $4$ slots of the current region.
+If the $∂Z_{mask_{r}}^{l-1}$ was dimensions $2 \times 2$, or size $4$, and the $r$th value in $∂Z^l$ was $8$, we'd divide $8$ by $4$, yielding $2$, and insert the $2$ into all $4$ slots of the current region.
 
 If our stride is less than the a given dimension of the kernel, (whether it be height or width), at some point, we will a have overlapping regions to insert values of $∂Z^l$. Then the case becomes that for the overlapping portions, we add the newly dispersed gradients, $(\frac{∂Z^l}{r_{size}})^r$, to the previously dispersed gradients at the previous $r$, $(\frac{∂Z^l}{∂r_{size}})^{r-1}$.
 
-This is done for all possible regions, $r$, in $∂Z^{l-1}_{mask}$, then $∂Z^{l-1}_{mask} \rightarrow ∂Z^{l-1}$
+This is done for all possible regions, $r$, in $∂Z_{mask}^{l-1}$, then $∂Z_{mask}^{l-1} \rightarrow ∂Z^{l-1}$
 
 ```math
 
-∂Z^{l-1} = ∂Z^{l-1}_{mask_r} + \frac{∂Z^{l-1}_{i, j}}{r_{size}}, \forall\hspace{1mm} (r, (i, j))
+∂Z^{l-1} = ∂Z_{mask_{r}}^{l-1} + \frac{∂Z^{l-1}_{i, j}}{r_{size}}, \forall\hspace{1mm} (r, (i, j))
 \\[3mm]
 \text{(this is element wise sum, where }\frac{∂Z^{l-1}_{i, j}}{r_{size}} \text{ is broadcasted over the region)}
 ```

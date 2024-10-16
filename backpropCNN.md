@@ -75,6 +75,8 @@ Once we have every possible $\mathcal{O}_i$, we element wise sum all $\mathcal{O
 ```math
 
 \mathcal{O}_{ij} = A^{l-1}_{patch_{ij}} \odot ∂Z_{ij}^l\\[3mm]
+
+
 ∂W^l = \sum_n^N\mathcal{O}_{n}
 
 ```

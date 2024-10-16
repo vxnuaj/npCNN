@@ -1,6 +1,4 @@
-### Backprop for CNNs
-
-> [Resource](https://people.tamu.edu/~sji/classes/bp.pdf)
+# Backprop for CNNs
 
 Backprop for CNNs is similar to the backpropagation for fully connected feed forward neural networks, as they both use the multivariable chain rule, but given that a conv layer shares weights, we can instead compute the gradient for individual $W_i$ weight at layer $l$ ($W_i^l$) in the kernel, $\mathcal{K}$, as the summed gradient of the given $W_i^l$ across all possible positions of $\mathcal{K}$, during the convolution of $\mathcal{K} * A^{l-1}$, where $A^{l-1}$ is the input to the $l\text{th}$ layer or the activation of the previous layer.
 
@@ -198,3 +196,5 @@ This is done for all possible regions, $r$, in $∂Z_{mask}^{l-1}$, then $∂Z_{
 ```math
 \text{(this is element wise sum, where }\frac{∂Z^{l-1}_{i, j}}{r_{size}} \text{ is broadcasted over the region)}
 ```
+
+> A Helpful [Resource](https://people.tamu.edu/~sji/classes/bp.pdf)

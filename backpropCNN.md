@@ -140,7 +140,7 @@ Given that **max pooling** downsamples the input to a smaller output ($\mathbb{R
 
 To upsample, we need to remember the indices of the maximum values within the pooling region of a given input $Z$, that were yielded via the kernel in the max pooling layer, $\mathcal{K}^{\text{MP}}$.
 
-Then, when we perform the max unpooling, we create an empty mask ($∂Z^{l-1}_{mask}$) with same shape as of the input of a pooling layer $Z$. Then, with the cached indices, we identify the respective positions in this empty mask and insert each value from the derivative of the max pooling layer, $∂Z^l$, into it's corresponding positions in $∂Z_{mask}^{l-1}$. Then $∂Z_{mask}^{l-1} \rightarrow ∂Z^{l-1}$.
+Then, when we perform the max unpooling, we create an empty mask ($∂Z_{mask}^{l-1}$) with same shape as of the input of a pooling layer $Z$. Then, with the cached indices, we identify the respective positions in this empty mask and insert each value from the derivative of the max pooling layer, $∂Z^l$, into it's corresponding positions in $∂Z_{mask}^{l-1}$. Then $∂Z_{mask}^{l-1} \rightarrow ∂Z^{l-1}$.
 
 This is essentially, **max-unpooling**, with with our partial derivatives.
 

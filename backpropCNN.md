@@ -74,11 +74,11 @@ Once we have every possible $\mathcal{O}_i$, we element wise sum all $\mathcal{O
 
 ```math
 
-\mathcal{O}_{ij} = A^{l-1}_{patch_{ij}} \odot ∂Z_{ij}^l\\[3mm]
+\mathcal{O}_{ij} = A^{l-1}_{patch_{ij}} \odot ∂Z_{ij}^l
+```
 
-
+```math
 ∂W^l = \sum_n^N\mathcal{O}_{n}
-
 ```
 
 where $N$ is the total number of patches.
@@ -107,7 +107,8 @@ Thereby, if we have a batch size that is greater than $1$, we can average all ou
 
 ```math
 ∂B =\frac{1}{\beta} \sum_{s=0}^{\beta} ∂B_s
-\\[3mm]
+```
+```math
 ∂W = \frac{1}{\beta} ∂W
 ```
 
@@ -193,6 +194,7 @@ This is done for all possible regions, $r$, in $∂Z_{mask}^{l-1}$, then $∂Z_{
 ```math
 
 ∂Z^{l-1} = ∂Z_{mask_{r}}^{l-1} + \frac{∂Z^{l-1}_{i, j}}{r_{size}}, \forall\hspace{1mm} (r, (i, j))
-\\[3mm]
+```
+```math
 \text{(this is element wise sum, where }\frac{∂Z^{l-1}_{i, j}}{r_{size}} \text{ is broadcasted over the region)}
 ```

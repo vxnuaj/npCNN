@@ -29,7 +29,7 @@ You can train the model as follows, feel free to tweak as you need. For more det
 
 </div >
 
-```
+```python
 # hyperparams
 seed = 1
 np.random.seed(seed)

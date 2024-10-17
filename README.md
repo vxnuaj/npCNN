@@ -19,7 +19,7 @@ It struggled to run any variation of MNIST (Fashion MNIST, K-MNIST, etc), even o
 
 <br>
 <div align = 'center'>
-<img src = 'imgs/shape.png' width = 1000></img>
+<img src = 'imgs/shapes.png' width = 1000></img>
 <br>
 <em>Shapes!</em>
 </div>

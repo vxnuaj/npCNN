@@ -3,11 +3,13 @@
 
 # npCNN
 
-*A minimal implementations of Convolutional Neural Network built from scratch, in only NumPy!*
+*A minimal implementation of a Convolutional Neural Network built from scratch, in only NumPy!*
 
 *There's no better way to learn, than building things out from scratch!*
 
 If you see any bugs, errors, etc, feel free to raise an issue or create a pull request.
+
+> Feel free to check out this blog post on [backprop through convolutions]() if you want to learn more!
 
 ### TRAINING
 
